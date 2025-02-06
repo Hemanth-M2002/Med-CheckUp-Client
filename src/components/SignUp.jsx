@@ -23,8 +23,9 @@ const SignUp = () => {
       setError('Passwords do not match');
       return;
     }
+    console.log('Form Data:', formData);
     setIsLoading(true);
-
+  
     try {
       const res = await fetch('http://localhost:3001/auth/signup', {
         method: 'POST',
@@ -35,19 +36,21 @@ const SignUp = () => {
           password: formData.password
         })
       });
-
+  
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
-
+      if (!res.ok) throw new Error(data.error || 'Unknown error');
+  
       // Secure token storage should be handled properly (e.g., HTTP-only cookies)
       localStorage.setItem('token', data.token);
       window.location.href = '/check-form';
     } catch (err) {
-      setError(err.message);
+      console.error('Error:', err); // Log error for debugging
+      setError(err.message); // Display error message to the user
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-indigo-50 flex items-center justify-center p-4">

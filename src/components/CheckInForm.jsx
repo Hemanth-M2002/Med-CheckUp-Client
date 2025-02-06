@@ -23,16 +23,44 @@ function CheckInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log({ mood, stressLevel, feelings });
-    setIsLoading(false);
-    setSubmitted(true);
+    
+    try {
+      const token = localStorage.getItem('token'); // Assuming you store JWT token here
+      const response = await fetch(`http://localhost:3001/check`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          mood,
+          stressLevel,
+          feelings
+        })
+      });
+  
+      if (!response.ok) throw new Error('Submission failed');
+      
+      setSubmitted(true);
+      setMood(5);
+      setStressLevel(5);
+      setFeelings("");
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to submit check-in');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleLogout = () => {
+    localStorage.removeItem("token"); // Clear token on logout
     console.log("Logged out");
+    
+    // Redirect to the login page
+    window.location.href = "/";
   };
+
 
   const getMoodIcon = (value) => {
     if (value <= 3) return <Frown className="w-6 h-6 text-red-500" />;
