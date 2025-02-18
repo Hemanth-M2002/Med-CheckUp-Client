@@ -128,9 +128,8 @@ function Login({ setIsLoggedIn }) {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 disabled={isLoading}
-                className={`w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-lg py-3 px-4 flex items-center justify-center space-x-2 font-medium transition-all duration-200 ${
-                  isLoading ? "opacity-75 cursor-not-allowed" : "hover:from-cyan-700 hover:to-blue-700"
-                }`}
+                className={`w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-lg py-3 px-4 flex items-center justify-center space-x-2 font-medium transition-all duration-200 ${isLoading ? "opacity-75 cursor-not-allowed" : "hover:from-cyan-700 hover:to-blue-700"
+                  }`}
               >
                 {isLoading ? (
                   <motion.div

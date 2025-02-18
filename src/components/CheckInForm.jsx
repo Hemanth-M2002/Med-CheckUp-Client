@@ -2,12 +2,12 @@ import { useState } from "react";
 import CustomSlider from "./CustomSlider";
 import { motion } from "framer-motion";
 import { fadeInUp } from "./animations";
-import { 
-  LogOut, 
-  Clipboard, 
-  Brain, 
-  Smile, 
-  Meh, 
+import {
+  LogOut,
+  Clipboard,
+  Brain,
+  Smile,
+  Meh,
   Frown,
   Activity,
   MessageSquare
@@ -23,7 +23,7 @@ function CheckInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     try {
       const token = localStorage.getItem('token'); // Assuming you store JWT token here
       const response = await fetch(`http://localhost:3001/check`, {
@@ -38,9 +38,9 @@ function CheckInForm() {
           feelings
         })
       });
-  
+
       if (!response.ok) throw new Error('Submission failed');
-      
+
       setSubmitted(true);
       setMood(5);
       setStressLevel(5);
@@ -56,8 +56,8 @@ function CheckInForm() {
   const handleLogout = () => {
     localStorage.removeItem("token"); // Clear token on logout
     console.log("Logged out");
-    
-    // Redirect to the login page
+
+    // Redirect to login page
     window.location.href = "/";
   };
 
@@ -221,9 +221,8 @@ function CheckInForm() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   disabled={isLoading}
-                  className={`w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-lg py-3 px-4 flex items-center justify-center space-x-2 font-medium transition-all duration-200 ${
-                    isLoading ? 'opacity-75 cursor-not-allowed' : 'hover:from-cyan-700 hover:to-blue-700'
-                  }`}
+                  className={`w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-lg py-3 px-4 flex items-center justify-center space-x-2 font-medium transition-all duration-200 ${isLoading ? 'opacity-75 cursor-not-allowed' : 'hover:from-cyan-700 hover:to-blue-700'
+                    }`}
                 >
                   {isLoading ? (
                     <motion.div

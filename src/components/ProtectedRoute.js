@@ -1,8 +1,12 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import React from "react";
+import { Navigate } from "react-router-dom";
 
-function ProtectedRoute({ children, isProtected = true, isSignupPage = false }) {
-  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+function ProtectedRoute({
+  children,
+  isProtected = true,
+  isSignupPage = false,
+}) {
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
   // If the page is protected and the user is not logged in, redirect to login page
   if (isProtected && !isLoggedIn) {
